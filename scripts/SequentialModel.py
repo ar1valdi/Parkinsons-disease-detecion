@@ -1,18 +1,18 @@
-from typing import Callable
-
 import torch
-import torchmetrics
 from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchmetrics.classification import BinaryAccuracy
+import matplotlib.pyplot as plt
+import numpy as np
 
-# TODO: add normalization step
-# TODO: try Adam optimizer
-# TODO: add learning rate scheduler
+from scripts.TrainMeasure import TrainMeasure
 
-# TODO: add check for class imbalance
-# TODO: normalize data in .csv
-# TODO: monitor gradients during training (exploading, vanishing)
+
+def _log_train_progress(epoch: int, measure: TrainMeasure) -> None:
+    print(f'==========Epoch {epoch + 1}==========')
+    print(f'Train: loss={measure.train_loss:5f}, acc={measure.train_acc:5f}')
+    print(f'Valid: loss={measure.val_loss:5f}, acc={measure.val_acc:5f}')
+
 
 class SequentialModel:
     def __init__(self,
@@ -20,19 +20,12 @@ class SequentialModel:
         self.criterion = nn.BCELoss()
         self.epochs_per_validate = 3
         self.model = nn.Sequential(
-            nn.Linear(n_in, 50).cuda(),
+            nn.Linear(n_in, 10).cuda(),
             nn.LeakyReLU().cuda(),
-            nn.Linear(50, 70).cuda(),
-            nn.LeakyReLU().cuda(),
-            nn.Linear(70, 20).cuda(),
-            nn.LeakyReLU().cuda(),
-            nn.Linear(20, 1).cuda(),
+            nn.Dropout(p=0.2),
+            nn.Linear(10, 1).cuda(),
             nn.Sigmoid().cuda()
-        )
-        self.optimizer = optim.SGD(
-            self.model.parameters(),
-            lr=0.001,
-            momentum=0.95)
+        ).cuda()
 
     def validate(self, val_loader: DataLoader) -> (float, float):
         val_loss = 0.0
@@ -51,55 +44,73 @@ class SequentialModel:
                 val_acc += acc.item()
 
         self.model.train()
-        return val_loss/len(val_loader), val_acc/len(val_loader)
+        return val_loss / len(val_loader), val_acc / len(val_loader)
 
-    def train(self, train_loader: DataLoader, epochs: int, lr: float, momentum: float,
-              epochs_per_val: int, val_loader: DataLoader) -> None:
+    def train(self, train_loader: DataLoader, epochs: int, lr: float, sc_step_size: int,
+              sc_gamma: float, epochs_per_val: int, val_loader: DataLoader,
+              log_progress: bool = False, plot_results: bool = True) -> TrainMeasure:
         val_counter = epochs_per_val
-        self.optimizer = optim.SGD(self.model.parameters(), lr=lr, momentum=momentum)
         acc_metric = BinaryAccuracy().cuda()
-        val_loss, val_acc = 0.0, 0.0
+        measure = TrainMeasure()
+
+        optimizer = optim.Adam(self.model.parameters(), lr=lr)
+        scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=sc_step_size, gamma=sc_gamma)
 
         for epoch in range(epochs):
-            train_loss, train_acc = 0.0, 0.0
-            val_counter += 1
+            epoch_loss, epoch_acc = 0.0, 0.0
 
+            # training epoch
             for features, targets in train_loader:
                 features, targets = features.cuda(), targets.cuda()
 
-                self.optimizer.zero_grad()
-
-                prediction = self.model(features).squeeze()
+                optimizer.zero_grad()
+                prediction = self.model(features).squeeze(dim=1)
                 loss = self.criterion(prediction, targets)
-                loss.backward()
-                self.optimizer.step()
-
                 acc = acc_metric(prediction, targets)
+                loss.backward()
+                optimizer.step()
 
-                train_loss += loss
-                train_acc += acc
+                epoch_loss += loss.item()
+                epoch_acc += acc.item()
 
+            scheduler.step()
+
+            # validation
+            val_counter += 1
             if val_counter >= epochs_per_val and val_loader is not None:
-                val_loss, val_acc = self.validate(val_loader)
+                measure.val_loss, measure.val_acc = self.validate(val_loader)
                 val_counter = 0
 
-            train_loss = train_loss/len(train_loader)
-            train_acc = train_acc/len(train_loader)
-            print(f'==========Epoch {epoch + 1}==========')
-            print(f'Train: loss={train_loss:5f}, acc={train_acc:5f}')
-            print(f'Valid: loss={val_loss:5f}, acc={val_acc:5f}')
+            # measures
+            measure.train_loss = epoch_loss / len(train_loader)
+            measure.train_acc = epoch_acc / len(train_loader)
+            measure.save_data()
+
+            # logs
+            if log_progress:
+                _log_train_progress(epoch, measure)
 
         print('Training done')
+        if plot_results:
+            measure.plot()
 
-    def test(self, test_loader):
-        return self.validate(test_loader)
+        return measure
 
-    def predict(self, features) -> int:
+    def test(self, test_loader, log_results: bool = True):
+        loss, acc = self.validate(test_loader)
+        if log_results:
+            print(f'TEST: loss={loss:.5f}, acc={acc:.5f}')
+        return loss, acc
+
+    def predict(self, features) -> (int, float):
         self.model.eval()
         with torch.no_grad():
             pred = self.model(features).squeeze()
         self.model.train()
         if pred > 0.5:
-            return 1
-        return 0
+            return 1, pred
+        return 0, 1 - pred
 
+    def print_devices(self):
+        for param in self.model.parameters():
+            print(f'param: {param.device}')

@@ -1,16 +1,20 @@
 {
-  "data_path": "datasets/parkinsons_disease_data.csv",
+  "data_path": "datasets/parkinsons_filtered.csv",
 
-  "test_frac": 0.1,
-  "val_frac": 0.1,
+  "data_portion": 1,
+
+  "test_frac": 0.12,
+  "val_frac": 0.08,
   "train_frac": 0.8,
 
-  "train_batch_size": 64,
+  "train_batch_size": 48,
   "val_batch_size": 64,
   "test_batch_size": 64,
-  "epochs": 100,
+  "epochs": 50,
   "epochs_per_val": 5,
 
-  "lr": 0.1,
-  "momentum": 0.95
+  "lr": 0.04,
+
+  "scheduler_step_size": 10,
+  "scheduler_gamma": 0.1
 }

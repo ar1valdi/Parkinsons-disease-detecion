@@ -1,0 +1,52 @@
+07.07.2024:
+created nn model with full evaluation mechanism, got poor performance acc=~40%
+    - 4 layers
+    - SGD optim
+    - no scheduler
+    - LeakyReLU between hidden layers
+
+08.07.2024:
+repaired cuda problems
+
+added Adam optimizer and scheduler, got acc=~75%
+    - 3 linear layers (in,20)(20,10)(10,1)
+    - LeakyReLU in between
+
+checked that on easier dataset nn works correctly (acc=~97%)
+
+experimented with different lr, scheduler, architecture
+    - used lr from different linspaces, none of them improved
+    - tried huge and tiny networks, none of them improved
+    - tried manually tweeking scheduler, did not improve
+
+processed data better:
+    - standardized
+    - got rid of columns that did not matter for diagnosis
+    - acc=~80%
+
+model optimization
+    - looking for starting lr with better data:
+        - run model on 100 different lr from 0.001 to 0.3 (linspace)
+        - lr=<0.04-0.06>, step_size=5, gamma=0.1 seems good for now
+            - (in,40)(40,20)(20,1) with LeakyReLU between hidden layers
+            - overfitting occurs with train_acc=0.999 and test_acc=~0.79
+            - proves that problem is solvable
+    - lowering overfitting
+        - reduced model to (in,10)(LeakyReLU)(Dropout p=0.2)(10,1)(Sigmoid)
+        - reduced batch size from 64 to 48
+        - got test_acc=~85%
+
+created mechanism to automatically search for best gamma and lr
+    - TODO: make it work parallel, too slow to use it now
+    - TODO: clean its code!!!!!!!!!
+
+
+=============================
+what could improve model:
+TODO: add normalization step
+TODO: add check for class imbalance
+TODO: monitor gradients during training (exploding, vanishing)
+
+finishing app:
+TODO: create frontend with form to enter data and check diagnosis
+TODO: figure out good way to enable user to retrain model
