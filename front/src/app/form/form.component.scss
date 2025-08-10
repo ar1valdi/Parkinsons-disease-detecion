@@ -123,11 +123,20 @@
   padding-right: 2.5rem;
   background-clip: padding-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: #1a1a1a;
+  -webkit-text-fill-color: #1a1a1a;
 }
 
 // Hide default arrow in legacy browsers
 .form-group select::-ms-expand {
   display: none;
+}
+
+// Placeholder styling for selects: when the empty option is selected
+// Safari/iOS supports :has(); use it to gray out placeholder
+.form-group select:has(option[value=""]:checked) {
+  color: #9aa0a6;
+  -webkit-text-fill-color: #9aa0a6;
 }
 
 .form-group input[type="number"] {
