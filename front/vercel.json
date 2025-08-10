@@ -1,3 +1,20 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/browser/index.html" }]
-}
+    "rewrites": [
+      {
+        "source": "/form",
+        "destination": "/browser/form/index.html"
+      },
+      {
+        "source": "/",
+        "destination": "/browser/index.html"
+      },
+      {
+        "source": "/(.*)",
+        "has": [
+          { "type": "missing" }
+        ],
+        "destination": "/browser/index.html"
+      }
+    ],
+    "cleanUrls": true
+  }
