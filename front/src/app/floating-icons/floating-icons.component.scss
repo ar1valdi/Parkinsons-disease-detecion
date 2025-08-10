@@ -119,10 +119,3 @@
     will-change: transform;
   }
 }
-
-// Responsive design
-@media (max-width: 1024px) {
-  .floating-icons-container {
-    display: none; // Hide floating icons on smaller screens
-  }
-}

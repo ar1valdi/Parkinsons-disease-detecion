@@ -1,6 +1,6 @@
 .form-section {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background-color: #f8f9fa;
   padding: 2rem 0;
   position: relative;
   overflow: hidden;
@@ -17,7 +17,24 @@
 .form-header {
   text-align: center;
   margin-bottom: 3rem;
-  position: relative;
+
+  .header-content {
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      right: -50px;
+      bottom: -50px;
+      background: #f8f9fa;
+      filter: blur(20px);
+      z-index: -2;
+    }
+  }
 }
 
 .info-text {
@@ -209,7 +226,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .form-section {
     padding: 1rem 0;
   }
