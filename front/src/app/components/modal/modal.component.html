@@ -1,0 +1,44 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="onClose()">
+  <div class="modal-container" [ngClass]="getModalClass()" (click)="$event.stopPropagation()">
+    <!-- Close button -->
+    <button class="modal-close" (click)="onClose()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Icon -->
+    <div class="modal-icon" *ngIf="modalConfig?.icon">
+      <div class="icon-container" [ngClass]="getIconClass()">
+        <img *ngIf="modalConfig?.icon === 'warning'" src="/warning.png" alt="Warning" width="48" height="48"/>
+        <svg *ngIf="modalConfig?.icon === 'error'" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <svg *ngIf="modalConfig?.icon === 'info'" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        <svg *ngIf="modalConfig?.icon === 'success'" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h2 class="modal-title" *ngIf="modalConfig?.title">
+      {{ modalConfig?.title }}
+    </h2>
+
+    <!-- Message -->
+    <div class="modal-message">
+      <p>{{ modalConfig?.message }}</p>
+    </div>
+
+    <!-- Button -->
+    <div class="modal-actions" *ngIf="modalConfig?.buttonText">
+      <button class="modal-button" (click)="onButtonClick()">
+        {{ modalConfig?.buttonText }}
+      </button>
+    </div>
+  </div>
+</div>

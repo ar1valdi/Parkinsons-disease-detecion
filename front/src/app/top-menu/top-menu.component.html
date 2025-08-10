@@ -1,0 +1,17 @@
+<div class="header-spacer"></div>
+<header class="top-menu">
+  <div class="container">
+    <div class="nav-left">
+      <a routerLink="/" (click)="scrollToSection('hero')" class="logo">
+        <img src="/logo.png" alt="First Signs Logo">
+      </a>
+      <nav class="navigation">
+        <a href="#about" class="nav-link" (click)="scrollToSection('about')">O projekcie</a>
+        <a href="#neural-network" class="nav-link" (click)="scrollToSection('neural-network')">Architektura sieci</a>
+        <a href="https://github.com/ar1valdi" class="nav-link" id="author">O autorze</a>
+      </nav>
+    </div>
+    
+    <a routerLink="/form" class="start-button" routerLink="/form">Zacznij teraz</a>
+  </div>
+</header>

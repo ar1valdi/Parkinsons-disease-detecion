@@ -1,0 +1,6 @@
+.idea
+.vscode
+_pycache_
+cache
+venv
+pyvenv.cfg

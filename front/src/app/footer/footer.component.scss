@@ -1,0 +1,103 @@
+.footer {
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  padding: 1.5rem 0;
+  position: relative;
+  z-index: 30;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5rem;
+  
+  .author-name,
+  .cookies-text {
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    
+    &:hover {
+      color: #289169;
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  img {
+    width: 100px;
+    height: auto;
+  }
+}
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .footer {
+    padding: 1rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .logo-text {
+    .first-line {
+      font-size: 1.1rem;
+    }
+    
+    .second-line {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .logo-bursts .burst {
+    font-size: 0.7rem;
+  }
+  
+  .logo-text {
+    .first-line {
+      font-size: 1rem;
+    }
+    
+    .second-line {
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -1,0 +1,259 @@
+<section class="form-section">
+  <div class="container">
+    <div class="form-header">
+      <h1 class="main-title">Wprowadź dane do analizy</h1>
+      <div class="info-text">
+        Analiza przeprowadzana jest w przeglądarce użytkownika - twoje dane nie są nigdzie wysyłane.
+      </div>
+    </div>
+
+    <form [formGroup]="analysisForm" (ngSubmit)="onSubmit()" class="analysis-form">
+      <div class="form-grid">
+        <!-- Personal Information -->
+        <div class="form-group">
+          <label for="age">Wiek</label>
+          <input type="number" id="age" formControlName="Age" placeholder="np. 65" min="18" max="120">
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Płeć</label>
+          <select id="gender" formControlName="Gender">
+            <option value="">Wybierz płeć</option>
+            <option value="0">Kobieta</option>
+            <option value="1">Mężczyzna</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ethnicity">Grupa etniczna</label>
+          <select id="ethnicity" formControlName="Ethnicity">
+            <option value="">Wybierz grupę etniczną</option>
+            <option value="0">Biała</option>
+            <option value="1">Azjatycka</option>
+            <option value="2">Afroamerykańska</option>
+            <option value="3">Latynoska</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="education">Poziom wykształcenia</label>
+          <select id="education" formControlName="EducationLevel">
+            <option value="">Wybierz poziom wykształcenia</option>
+            <option value="0">Podstawowe</option>
+            <option value="1">Średnie</option>
+            <option value="2">Wyższe</option>
+            <option value="3">Podyplomowe</option>
+          </select>
+        </div>
+
+        <!-- Health Metrics -->
+        <div class="form-group">
+          <label for="bmi">BMI (wskaźnik masy ciała)</label>
+          <input type="number" id="bmi" formControlName="BMI" placeholder="np. 24.5" step="0.1" min="10" max="60">
+        </div>
+
+        <div class="form-group">
+          <label for="smoking">Palenie papierosów</label>
+          <select id="smoking" formControlName="Smoking">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Nie palę</option>
+            <option value="1">Palę</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="alcohol">Spożycie alkoholu (jednostki/tydzień)</label>
+          <input type="number" id="alcohol" formControlName="AlcoholConsumption" placeholder="np. 5" step="0.1" min="0" max="50">
+        </div>
+
+        <div class="form-group">
+          <label for="physicalActivity">Aktywność fizyczna (godziny/tydzień)</label>
+          <input type="number" id="physicalActivity" formControlName="PhysicalActivity" placeholder="np. 3" step="0.1" min="0" max="20">
+        </div>
+
+        <div class="form-group">
+          <label for="dietQuality">Jakość diety (1-10)</label>
+          <input type="number" id="dietQuality" formControlName="DietQuality" placeholder="np. 7" min="1" max="10">
+        </div>
+
+        <div class="form-group">
+          <label for="sleepQuality">Jakość snu (1-10)</label>
+          <input type="number" id="sleepQuality" formControlName="SleepQuality" placeholder="np. 8" min="1" max="10">
+        </div>
+
+        <!-- Medical History -->
+        <div class="form-group">
+          <label for="familyHistory">Historia rodzinna choroby Parkinsona</label>
+          <select id="familyHistory" formControlName="FamilyHistoryParkinsons">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="brainInjury">Uraz głowy</label>
+          <select id="brainInjury" formControlName="TraumaticBrainInjury">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="hypertension">Nadciśnienie</label>
+          <select id="hypertension" formControlName="Hypertension">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="diabetes">Cukrzyca</label>
+          <select id="diabetes" formControlName="Diabetes">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="depression">Depresja</label>
+          <select id="depression" formControlName="Depression">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="stroke">Udar mózgu</label>
+          <select id="stroke" formControlName="Stroke">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <!-- Blood Pressure -->
+        <div class="form-group">
+          <label for="systolicBP">Ciśnienie skurczowe (mmHg)</label>
+          <input type="number" id="systolicBP" formControlName="SystolicBP" placeholder="np. 120" min="70" max="200">
+        </div>
+
+        <div class="form-group">
+          <label for="diastolicBP">Ciśnienie rozkurczowe (mmHg)</label>
+          <input type="number" id="diastolicBP" formControlName="DiastolicBP" placeholder="np. 80" min="40" max="130">
+        </div>
+
+        <!-- Cholesterol -->
+        <div class="form-group">
+          <label for="cholesterolTotal">Cholesterol całkowity (mg/dL)</label>
+          <input type="number" id="cholesterolTotal" formControlName="CholesterolTotal" placeholder="np. 200" min="100" max="400">
+        </div>
+
+        <div class="form-group">
+          <label for="cholesterolLDL">Cholesterol LDL (mg/dL)</label>
+          <input type="number" id="cholesterolLDL" formControlName="CholesterolLDL" placeholder="np. 100" min="50" max="300">
+        </div>
+
+        <div class="form-group">
+          <label for="cholesterolHDL">Cholesterol HDL (mg/dL)</label>
+          <input type="number" id="cholesterolHDL" formControlName="CholesterolHDL" placeholder="np. 60" min="20" max="150">
+        </div>
+
+        <div class="form-group">
+          <label for="cholesterolTriglycerides">Trójglicerydy (mg/dL)</label>
+          <input type="number" id="cholesterolTriglycerides" formControlName="CholesterolTriglycerides" placeholder="np. 150" min="50" max="500">
+        </div>
+
+        <!-- Clinical Assessments -->
+        <div class="form-group">
+          <label for="updrs">UPDRS (skala oceny choroby Parkinsona)</label>
+          <input type="number" id="updrs" formControlName="UPDRS" placeholder="np. 15" step="0.1" min="0" max="200">
+        </div>
+
+        <div class="form-group">
+          <label for="moca">MoCA (test oceny funkcji poznawczych)</label>
+          <input type="number" id="moca" formControlName="MoCA" placeholder="np. 25" step="0.1" min="0" max="30">
+        </div>
+
+        <div class="form-group">
+          <label for="functionalAssessment">Ocena funkcjonalna</label>
+          <input type="number" id="functionalAssessment" formControlName="FunctionalAssessment" placeholder="np. 2" step="0.1" min="0" max="10">
+        </div>
+
+        <!-- Symptoms -->
+        <div class="form-group">
+          <label for="tremor">Drżenie</label>
+          <select id="tremor" formControlName="Tremor">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rigidity">Sztywność</label>
+          <select id="rigidity" formControlName="Rigidity">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bradykinesia">Bradykinezja (spowolnienie ruchów)</label>
+          <select id="bradykinesia" formControlName="Bradykinesia">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="posturalInstability">Niestabilność postawy</label>
+          <select id="posturalInstability" formControlName="PosturalInstability">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="speechProblems">Problemy z mową</label>
+          <select id="speechProblems" formControlName="SpeechProblems">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sleepDisorders">Zaburzenia snu</label>
+          <select id="sleepDisorders" formControlName="SleepDisorders">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="constipation">Zaparcia</label>
+          <select id="constipation" formControlName="Constipation">
+            <option value="">Wybierz opcję</option>
+            <option value="0">Brak</option>
+            <option value="1">Tak</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="submit-container">
+        <button type="submit" class="submit-button" [disabled]="!analysisForm.valid">
+          Zatwierdź
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

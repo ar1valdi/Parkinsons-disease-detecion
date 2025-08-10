@@ -1,0 +1,223 @@
+.neural-network {
+  padding: 5rem 0;
+  position: relative;
+  z-index: 20;
+  background: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4rem;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.network-description {
+  .description-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin: 0;
+    text-align: left;
+  }
+}
+
+.cta-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.cta-button {
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+  background: linear-gradient(135deg, #97FFD7, #199D6A, #97FFD7);
+  background-size: 200% 200%;
+  color: white;
+  border: none;
+  width: 300px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+  animation: gradientMove 10s ease-in-out infinite;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.decorative-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pills-icon {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  
+  .decorative-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    opacity: 0.7;
+  }
+}
+
+.clipboard-icon {
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+  
+  .decorative-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    opacity: 0.7;
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .network-description .description-text {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.9rem 2.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .neural-network {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .content-wrapper {
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .network-diagram .diagram-image {
+    max-width: 90%;
+  }
+
+  .network-description .description-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .cta-button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+
+  .pills-icon .decorative-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .clipboard-icon .decorative-image {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .neural-network {
+    padding: 2rem 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .content-wrapper {
+    gap: 1.5rem;
+  }
+
+  .network-diagram .diagram-image {
+    max-width: 100%;
+  }
+
+  .network-description .description-text {
+    font-size: 0.9rem;
+  }
+
+  .cta-button {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.95rem;
+  }
+
+  .pills-icon {
+    top: 5%;
+    right: 3%;
+    
+    .decorative-image {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .clipboard-icon {
+    bottom: 15%;
+    left: 3%;
+    
+    .decorative-image {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}

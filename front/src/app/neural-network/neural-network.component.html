@@ -1,0 +1,23 @@
+<section class="neural-network">
+  <div class="container">
+    <h2 class="section-title">Architektura sieci neuronowej</h2>
+    
+    <div class="content-wrapper">
+      <article class="network-diagram">
+        <img src="/neural-network.png" alt="Neural Network Architecture Diagram" class="diagram-image">
+      </article>
+      
+      <article class="network-description">
+        <p class="description-text">
+          Sieć posiada dwie ukryte warstwy. W pierwszej użyła została funkcja LeakyReLU oraz Dropout=0.2, natomiast w drugiej Sigmoid. Podczas treningu użyło wielkości podzbioru danych (batch size) równej 48 rekordów, a sam trening odbył się poprzez 50 iteracji (epochs), z czego przy co piątej przeprowadza była walidacja jakości modelu. Do optymalizacji użyła została metoda Adam ze współczynnikiem uczenia równym 0.04, który zmniejszany był co dziesięć epok o 0.01.
+        </p>
+      </article>
+    </div>
+    
+    <div class="cta-container">
+      <a routerLink="/form" class="cta-button">
+        Rozpocznij analizę
+      </a>
+    </div>
+  </div>
+</section>

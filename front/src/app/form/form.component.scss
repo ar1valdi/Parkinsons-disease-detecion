@@ -1,0 +1,283 @@
+.form-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.info-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  text-align: center;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 2rem 0;
+}
+
+.analysis-form {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 20;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.8rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: #289169;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  }
+
+  &:hover {
+    border-color: #289169;
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: #f44336;
+    background: #fff5f5;
+  }
+}
+
+.form-group input[type="number"] {
+  -moz-appearance: textfield;
+  
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.submit-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #97FFD7, #199D6A, #97FFD7);
+  background-size: 200% 200%;
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+  min-width: 200px;
+  animation: gradientMove 10s ease-in-out infinite;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// Floating medical icons (background decoration)
+.form-section::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 80px;
+  height: 80px;
+  background: url('/3d_medicine_prescription_and_pills.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+.form-section::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  right: 5%;
+  width: 60px;
+  height: 60px;
+  background: url('/020_Medical_Tag.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite 2s;
+  z-index: 1;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+// Error styling
+.form-group input.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched {
+  border-color: #f44336;
+  background: #fff5f5;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .analysis-form {
+    padding: 2rem;
+    margin: 0 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-section {
+    padding: 1rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .analysis-form {
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+
+  .form-grid {
+    gap: 1rem;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-text {
+    font-size: 0.8rem;
+  }
+
+  .submit-button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+
+  .shield-icon .icon-image {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .analysis-form {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .main-title {
+    font-size: 1.5rem;
+  }
+
+  .submit-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 160px;
+  }
+
+  .shield-icon {
+    position: static;
+    text-align: center;
+    margin-top: 1rem;
+    
+    .icon-image {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
