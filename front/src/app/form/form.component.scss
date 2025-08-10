@@ -133,10 +133,30 @@
 }
 
 // Placeholder styling for selects: when the empty option is selected
-// Safari/iOS supports :has(); use it to gray out placeholder
-.form-group select:has(option[value=""]:checked) {
+// Scope to non-focused state to avoid affecting iOS picker overlay
+.form-group select:has(option[value=""]:checked):not(:focus) {
   color: #9aa0a6;
   -webkit-text-fill-color: #9aa0a6;
+}
+
+// When the select is focused (iOS opens native picker), force normal text color
+.form-group select:focus,
+.form-group select:active {
+  color: #1a1a1a;
+  -webkit-text-fill-color: #1a1a1a;
+}
+
+
+// Ensure options list has normal colors; placeholder option is gray
+.form-group select option {
+  color: #1a1a1a;
+}
+.form-group select option[value=""] {
+  color: #9aa0a6;
+}
+
+option {
+  border-radius: 10px;
 }
 
 .form-group input[type="number"] {
@@ -185,35 +205,6 @@
     transform: none;
     box-shadow: none;
   }
-}
-
-// Floating medical icons (background decoration)
-.form-section::before {
-  content: '';
-  position: absolute;
-  top: 10%;
-  left: 5%;
-  width: 80px;
-  height: 80px;
-  background: url('/3d_medicine_prescription_and_pills.png') no-repeat center;
-  background-size: contain;
-  opacity: 0.3;
-  animation: float 6s ease-in-out infinite;
-  z-index: 1;
-}
-
-.form-section::after {
-  content: '';
-  position: absolute;
-  bottom: 20%;
-  right: 5%;
-  width: 60px;
-  height: 60px;
-  background: url('/020_Medical_Tag.png') no-repeat center;
-  background-size: contain;
-  opacity: 0.3;
-  animation: float 6s ease-in-out infinite 2s;
-  z-index: 1;
 }
 
 @keyframes float {
